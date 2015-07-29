@@ -5,7 +5,7 @@ public:
             return false;
 
         // Unlike similar problems, we need to iterate over the whole dictionary 
-        // to check if |nums[i] - nums[j]| <= t, which is of O(n) time complexity
+        // to check if |nums[i] - nums[j]| <= t, which is of O(k) time complexity
 
         // To reduce complexity, note our aim is to find |nums[i] - nums[j]| <= t,
         // |nums[i]/t - nums[j]/t| <= 1, which also implies
@@ -20,6 +20,8 @@ public:
         // values with keys outside [-1 + floor(nums[j]/t), 1 + floor(nums[j]/t)]
         // will make |nums[i] - nums[j]| > t
         // We only need to check values with keys between [-1 + floor(nums[j]/t), 1 + floor(nums[j]/t)]
+        // O(k) can be reduced to O(1)
+
         // Ref: http://bookshadow.com/weblog/2015/06/03/leetcode-contains-duplicate-iii/
 
         unordered_map<int, int> m;
