@@ -20,6 +20,7 @@ public:
         // values with keys outside [-1 + floor(nums[j]/t), 1 + floor(nums[j]/t)]
         // will make |nums[i] - nums[j]| > t
         // We only need to check values with keys between [-1 + floor(nums[j]/t), 1 + floor(nums[j]/t)]
+        // Ref: http://bookshadow.com/weblog/2015/06/03/leetcode-contains-duplicate-iii/
 
         unordered_map<int, int> m;
         for (int i = 0; i < nums.size(); ++i) {
