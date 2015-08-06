@@ -12,38 +12,27 @@ public:
         if (!head) return NULL;
         if (k < 2) return head;
 
-        ListNode dummy(-1);
+        ListNode dummy(0);
         dummy.next = head;
 
-        ListNode *cur = head, *beginPrev = &dummy, *begin = head;
+        ListNode *cur = head, *prev = &dummy;
         int count = 1;
         while (cur) {
+            ListNode *nxt = cur->next;
             if (count % k == 0) {
-                ListNode *nxt = cur->next;
-                reverse(begin, cur->next);
-
-                // Manage the new links of the two ends
-                beginPrev->next = cur;
-                begin->next = nxt;
-
-                // Reset the cur after reversing
-                cur = begin;
-
-                // The new begin
-                beginPrev = begin;
-                begin = nxt;
+                // The last element of k-reversed-list will be prev for the next k-reversed-list
+                prev = reverse(prev, cur->next);
             }
-
             ++count;
-            cur = cur->next;
+            cur = nxt;
         }
 
         return dummy.next;
     }
 
-    // Reverse the list until reaching end
-    ListNode *reverse(ListNode *begin, ListNode *end) {
-        ListNode *last = NULL, *cur = begin;
+    // Reverse the list until reaching end (adjust to maintain the links of head and tail more easily)
+    ListNode *reverse(ListNode *prev, ListNode *end) {
+        ListNode *last = end, *head = prev->next, *cur = head;
         while (cur != end) {
             ListNode *nxt = cur->next;
             cur->next = last;
@@ -51,7 +40,9 @@ public:
             cur = nxt;
         }
 
-        // Return the new head
-        return last;
+        prev->next = last;
+
+        // Return the last element
+        return head;
     }
 };
