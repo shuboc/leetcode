@@ -1,18 +1,16 @@
 class Solution {
 public:
-    int removeDuplicates(int A[], int n) {
-        if (n == 0)
-            return 0;
-        int num = A[0], i = 1, next = 1;
-        while (i < n) {
-            if (A[i] != num) {
-                A[next] = A[i];
-                num = A[i];
-                ++next;
+    int removeDuplicates(vector<int>& nums) {
+        if (nums.empty()) return 0;
+
+        int end = 0; // The index of the last element of the non-duplicate array
+        for (int i = 1; i < nums.size(); ++i) {
+            if (nums[i] != nums[end]) {
+                nums[end+1] = nums[i];
+                ++end;
             }
-            ++i;
         }
-        
-        return next;
+
+        return end+1;
     }
 };
